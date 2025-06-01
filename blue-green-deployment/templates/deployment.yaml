@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}-{{ .Values.color }}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+      color: {{ .Values.color }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+        color: {{ .Values.color }}
+    spec:
+      containers:
+        - name: {{ .Values.app.name }}
+          image: hashicorp/http-echo
+          args:
+            - "-text=Hello from {{ .Values.app.name }} color {{ .Values.color }}"
+            - "-listen=:{{ .Values.service.port }}"
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+          startupProbe:
+            tcpSocket:
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 20
+            periodSeconds: 5

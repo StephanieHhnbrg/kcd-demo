@@ -1,0 +1,4 @@
+app:
+  name: kcd-rolling-update-demo
+service:
+  port: 8181

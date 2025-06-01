@@ -1,0 +1,4 @@
+app:
+  name: kcd-recreate-demo
+service:
+  port: 8182
