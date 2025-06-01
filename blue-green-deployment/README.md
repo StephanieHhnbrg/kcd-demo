@@ -9,7 +9,7 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
 
 ## Steps
 1. Install Blue version
-   - `helm install kcd-blue-demo`
+   - `helm install kcd-blue-demo ./`
 2. Install Green version
    - `helm install kcd-green-demo ./ --set color=green`
 3. Redirect Traffic

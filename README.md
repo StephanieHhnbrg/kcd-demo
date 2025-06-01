@@ -1,6 +1,7 @@
 # KCD Demo
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?logo=kubernetes&logoColor=fff)](#)
 [![Helm](https://img.shields.io/badge/Helm-0F1689?logo=helm&logoColor=fff)](#)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff)](#)
 
 This project showcases how to apply different Kubernetes deployment strategies using Helm charts.
 - [Recreate](./recreate/README.md): terminating old version and releasing new one, causing downtime
@@ -8,7 +9,7 @@ This project showcases how to apply different Kubernetes deployment strategies u
 - [Blue / Green](./blue-green-deployment/README.md): releasing new version alongside the old version and switch traffic
 - [Canary](#): releasing new version to a subset of users and then do a full rollout
 
-## Requirements
+## Prerequisites
 Ensure the following tools are installed:
 - [Docker](https://docs.docker.com/desktop/setup/install/mac-install/)
 - [minikube](https://minikube.sigs.k8s.io/docs/) -> `brew install minikube`
@@ -21,6 +22,9 @@ Ensure the following tools are installed:
 - `docker info`
 - `minikube status`
 - `kubectl get nodes`
+
+In case a custom Docker Image is used in the `deployment.yaml`, create a K8 secret for the authentication to GitHub Container Registry. See step 4 in this [README](./docker/README.md)
+
 
 ## Clean Up
 - `helm uninstall <release-name>`

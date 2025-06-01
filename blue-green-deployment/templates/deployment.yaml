@@ -14,15 +14,18 @@ spec:
         app: {{ .Values.app.name }}
         color: {{ .Values.color }}
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: {{ .Values.app.name }}
-          image: hashicorp/http-echo
-          args:
-            - "-text=Hello from {{ .Values.app.name }} color {{ .Values.color }}"
-            - "-listen=:{{ .Values.service.port }}"
+          image: "ghcr.io/stephaniehhnbrg/kcd-demo:{{ .Values.color }}"
+          imagePullPolicy: Always
+          env:
+          - name: PORT
+            value: "{{ .Values.service.port }}"
           ports:
-            - name: http
-              containerPort: {{ .Values.service.port }}
+          - name: http
+            containerPort: {{ .Values.service.port }}
           startupProbe:
             tcpSocket:
               port: {{ .Values.service.port }}
