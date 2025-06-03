@@ -12,7 +12,8 @@ spec:
         - headers:
             cookie:
               regex: "(^|.*; *)ab_test_group=B(;.*|$)"
-            # regex: "^(.*?;)?(email=[^;]*@company.com)(;.*)?$" # alternatively enable new version only for employees as testing group
+            # alternatively enable new version only for employees as testing group
+            # regex: "^(.*?;)?(email=[^;]*@company.com)(;.*)?$"
       route:
         - destination:
             host: {{ .Values.app.name }}

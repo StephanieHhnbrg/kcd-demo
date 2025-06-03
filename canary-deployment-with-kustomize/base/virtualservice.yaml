@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: kcd-canary-demo
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - kcd-canary-demo-gateway
+  http:
+    - route:
+        - destination:
+            host: kcd-canary-demo
+            subset: v1
+          weight: 100
+        - destination:
+            host: kcd-canary-demo
+            subset: v2
+          weight: 0

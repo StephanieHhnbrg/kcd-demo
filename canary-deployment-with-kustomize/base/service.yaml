@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kcd-canary-demo
+  labels:
+    app: kcd-canary-demo
+spec:
+  selector:
+    app: kcd-canary-demo
+  ports:
+    - protocol: TCP
+      port: 8186
+      targetPort: http

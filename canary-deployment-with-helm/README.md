@@ -1,4 +1,4 @@
-# Canary Deployment 🦜
+# Canary Deployment with Helm 🦜
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?logo=kubernetes&logoColor=fff)](#)
 [![Helm](https://img.shields.io/badge/Helm-0F1689?logo=helm&logoColor=fff)](#)
 
@@ -14,19 +14,13 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
    - `kubectl get svc istio-ingressgateway -n istio-system`
    - `kubectl get namespace -L istio-injection`
    - `kubectl port-forward -n istio-system svc/istio-ingressgateway 8080:80`
-2. Deploy v1 and v2
+2. Install v1 and v2
    - Ensure the traffic is set to 100% for v1 by modifying [`virtualservice.yaml`](charts/routing/templates/virtualservice.yaml) 
    - `helm install kcd-canary-demo-v1 ./charts/deployment --set app.version=v1`
    - `helm install kcd-canary-demo-v2 ./charts/deployment --set app.version=v2`
    - `helm install kcd-canary-routing ./charts/routing`
-3. Autoscaling
-  - `kubectl autoscale deployment kcd-canary-demo-v1 --cpu-percent=50 --min=1 --max=10`
-  - `kubectl autoscale deployment kcd-canary-demo-v2 --cpu-percent=50 --min=1 --max=10`
-  - `kubectl get hpa`
 3. Traffic Switching
    - `helm upgrade kcd-canary-routing ./charts/routing --set traffic.v1=80 --set traffic.v2=20`
-   - `helm upgrade kcd-canary-demo-v1 ./charts/deployment --set app.version=v1 --set app.replicas=4`
-   - `helm upgrade kcd-canary-demo-v2 ./charts/deployment --set app.version=v2 --set app.replicas=4`
 4. Verify deployment
 - `kubectl get virtualservice kcd-canary-demo -o jsonpath='{range .spec.http[0].route[*]}Subset: {.destination.subset}, Weight: {.weight}{"\n"}{end}'`
 - `watch -n 0.5 -t kubectl get pods -n default`

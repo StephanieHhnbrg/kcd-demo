@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kcd-bg-demo
+spec:
+  selector:
+    app: kcd-bg-demo
+    color: blue
+  ports:
+    - protocol: TCP
+      port: 8185
+      targetPort: http
