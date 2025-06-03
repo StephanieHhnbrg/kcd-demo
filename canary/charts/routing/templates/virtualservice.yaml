@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Values.app.name }}
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - kcd-canary-gateway
+  http:
+    - route:
+        - destination:
+            host: {{ .Values.app.name }}
+            subset: v1
+          weight: {{ .Values.traffic.v1 }}
+        - destination:
+            host: {{ .Values.app.name }}
+            subset: v2
+          weight: {{ .Values.traffic.v2 }}

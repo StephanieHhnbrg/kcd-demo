@@ -3,6 +3,3 @@ app:
 service:
   port: 8183
 color: blue
-image:
-  repository: nginx
-  tag: stable

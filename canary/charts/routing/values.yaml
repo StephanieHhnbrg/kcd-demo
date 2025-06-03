@@ -1,0 +1,7 @@
+app:
+  name: kcd-canary-demo
+service:
+  port: 8184
+traffic:
+  v1: 100
+  v2: 0

@@ -1,0 +1,6 @@
+app:
+  name: kcd-canary-demo
+  version: v1
+  replicas: 1
+service:
+  port: 8184
