@@ -6,7 +6,7 @@ spec:
   hosts:
     - "*"
   gateways:
-    - kcd-canary-gateway
+    - "{{ .Values.app.name }}-gateway"
   http:
     - route:
         - destination:

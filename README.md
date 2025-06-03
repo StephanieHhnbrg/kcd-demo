@@ -7,7 +7,8 @@ This project showcases how to apply different Kubernetes deployment strategies u
 - [Recreate](./recreate/README.md): terminating old version and releasing new one, causing downtime
 - [Ramped](./ramped/README.md): releasing new version on a rolling updating fashion, gradually replacing pods (default strategy)
 - [Blue / Green](./blue-green-deployment/README.md): releasing new version alongside the old version and switch traffic
-- [Canary](#): releasing new version to a subset of users and then do a full rollout
+- [Canary](./canary/README.md): releasing new version to a subset of users and then do a full rollout
+- [A / B Testing](./a-b-testing/README.md): releasing new version to a subset of users for testing purposes
 
 ## Prerequisites
 Ensure the following tools are installed:

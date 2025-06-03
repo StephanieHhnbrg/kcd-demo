@@ -1,0 +1,4 @@
+app:
+  name: kcd-ab-demo
+service:
+  port: 8185

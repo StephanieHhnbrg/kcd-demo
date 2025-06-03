@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Values.app.name }}
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - "{{ .Values.app.name }}-gateway"
+  http:
+    - match:
+        - headers:
+            cookie:
+              regex: "(^|.*; *)ab_test_group=B(;.*|$)"
+            # regex: "^(.*?;)?(email=[^;]*@company.com)(;.*)?$" # alternatively enable new version only for employees as testing group
+      route:
+        - destination:
+            host: {{ .Values.app.name }}
+            subset: v2
+    - route: # default route
+        - destination:
+            host: {{ .Values.app.name }}
+            subset: v1
