@@ -3,6 +3,16 @@
 
 This demo showcases how to manage Kubernetes canary deployments using kustomize.
 
+Similar to the blue/green deployment strategy, canary deployments run both the old and new versions simultaneously. However, instead of switching traffic instantly from one version to the other, the transition happens gradually, allowing confidence in the new version to grow over time.
+
+By defining traffic weights in the [virtual service](./base/virtualservice.yaml) a small percentage of user traffic can be routed to the new version. This enables real-world testing with a limited audience before performing a full rollout.
+
+Canary deployments require advanced traffic management and additional resources.
+By using [Istio](https://istio.io), several components need to be configured, alongside the standard Kubernetes deployment and service.
+- DestinationRule, defines policies and subsets for routing traffic
+- VirtualService, controls how requests are routed to services within the mesh
+- Gateway, configures how external traffic enters the service mesh
+
 For installation prerequisites, setup instructions, and cleanup procedures, please refer to the main [README](./../README.md) in the repository root.
 
 ## Steps
@@ -21,8 +31,8 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
 3. Traffic shifting
    - `kubectl get virtualservice kcd-canary-demo -o jsonpath='{range .spec.http[0].route[*]}Subset: {.destination.subset}, Weight: {.weight}{"\n"}{end}'`
    - ```kubectl patch virtualservice kcd-canary-demo --type='json' -p='[
-          { "op": "replace", "path": "/spec/http/0/route/0/weight", "value": 0 },
-          { "op": "replace", "path": "/spec/http/0/route/1/weight", "value": 100}
+          { "op": "replace", "path": "/spec/http/0/route/0/weight", "value": 50 },
+          { "op": "replace", "path": "/spec/http/0/route/1/weight", "value": 50}
         ]'
    ```
 4. Verify Deployments
@@ -35,3 +45,5 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
    - `kubectl delete -k overlays/v1`
    - `kubectl delete deployment kcd-canary-demo-v2`
 
+## Demo
+![Demo](./../assets/canary-kustomize.gif)

@@ -4,6 +4,16 @@
 
 This demo showcases how to manage Kubernetes canary deployments using Helm charts.
 
+Similar to the blue/green deployment strategy, canary deployments run both the old and new versions simultaneously. However, instead of switching traffic instantly from one version to the other, the transition happens gradually, allowing confidence in the new version to grow over time.
+
+By defining traffic weights in the [virtual service](./charts/routing/templates/virtualservice.yaml) a small percentage of user traffic can be routed to the new version. This enables real-world testing with a limited audience before performing a full rollout.
+
+Canary deployments require advanced traffic management and additional resources. 
+By using [Istio](https://istio.io), several components need to be configured, alongside the standard Kubernetes deployment and service.
+- DestinationRule, defines policies and subsets for routing traffic
+- VirtualService, controls how requests are routed to services within the mesh
+- Gateway, configures how external traffic enters the service mesh
+
 For installation prerequisites, setup instructions, and cleanup procedures, please refer to the main [README](./../README.md) in the repository root.
 
 
@@ -13,6 +23,7 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
    - `kubectl label namespace default istio-injection=enabled`
    - `kubectl get svc istio-ingressgateway -n istio-system`
    - `kubectl get namespace -L istio-injection`
+   - `kubectl get pods -n istio-system`
    - `kubectl port-forward -n istio-system svc/istio-ingressgateway 8080:80`
 2. Install v1 and v2
    - Ensure the traffic is set to 100% for v1 by modifying [`virtualservice.yaml`](charts/routing/templates/virtualservice.yaml) 
@@ -27,23 +38,5 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
 - `for i in `seq 1 100`; do curl http://localhost:8080/; echo ""; sleep 0.2; done`
 
 
-## Monitoring
-Grafana
-- `kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.22/samples/addons/prometheus.yaml`
-- `kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.22/samples/addons/grafana.yaml`
-- `kubectl get pods -n istio-system` -> wait until grafana and promotheus pods are runnning
-- `kubectl port-forward -n istio-system svc/prometheus 9090:9090`
-- `kubectl -n istio-system port-forward svc/grafana 3000:3000`
-- navigate to http://localhost:3000/ and explore the dashboards
-
-Kiala
-- `helm repo add kiali https://kiali.org/helm-charts`
-- `helm repo update`
-- ```helm install kiali-server kiali/kiali-server \
-  --namespace istio-system \
-  --set auth.strategy="anonymous" \
-  --set deployment.accessible_namespaces="**"
-  ```
-- `istioctl dashboard kiali`
-- navigate to http://localhost:20001
-
+## Demo
+![Demo](./../assets/canary-helm.gif)

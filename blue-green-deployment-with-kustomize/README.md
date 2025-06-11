@@ -3,6 +3,15 @@
 
 This demo showcases how to manage Kubernetes blue/green deployments using kustomize.
 
+In this strategy, the new version is deployed alongside the existing version. These two environments, referred to as “blue” (current) and “green” (new), run simultaneously, but the service routes traffic to only one of them at a time. The traffic can be switched to the new version once it’s ready.
+
+This approach is ideal for mission-critical systems that require high-confidence rollouts, as it enables near-instant traffic switching and rollback with minimal risk.
+The main drawback is increased resource consumption, as both versions must run concurrently, effectively doubling infrastructure requirements during the rollout.
+
+To implement a blue/green deployment in Kubernetes, two separate [deployments](./base/deployment.yaml) differentiated by labels are created. The [service](./base/service.yaml) uses label selectors to determine which deployment receives traffic.
+By updating the label selector in the service to point to the other color, traffic is seamlessly redirected from blue to green. The previous deployment and its pods continue to run in the background but no longer receive traffic, they remain idle and can be used for quick rollback if needed.
+
+
 For installation prerequisites, setup instructions, and cleanup procedures, please refer to the main [README](./../README.md) in the repository root.
 
 ## Steps
@@ -30,3 +39,5 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
    - `kubectl delete -k overlays/blue`
    - `kubectl delete deployment kcd-bg-demo-green`
 
+## Demo
+![Demo](./../assets/blue-green-kustomize.gif)

@@ -4,6 +4,13 @@
 
 This demo showcases how to manage Kubernetes deployments using Helm charts for A/B testing.
 
+This deployment strategy is used for testing purposes to gain insight about user behaviour. 
+While similar to canary deployments, where traffic is split between two versions, A/B testing differs in how traffic is routed. 
+Instead of a random weight-based distribution, traffic is directed based on specific user characteristics, such as headers, cookies, or location.
+
+In this demo, the routing logic uses a cookie in the request header to identify users belonging to test group B and routes them to the new version. 
+All other users are routed to the default path, which forwards requests to the old version.
+
 For installation prerequisites, setup instructions, and cleanup procedures, please refer to the main [README](./../README.md) in the repository root.
 
 

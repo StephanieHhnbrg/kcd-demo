@@ -27,11 +27,37 @@ Ensure the following tools are installed:
 
 In case a custom Docker Image is used in the `deployment.yaml`, create a K8 secret for the authentication to GitHub Container Registry. See step 4 in this [README](./docker/README.md)
 
-
 ## Clean Up
 - `helm uninstall <release-name>`
 - `minikube delete`
 
+
+## Monitoring
+### Grafana
+- `kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.22/samples/addons/prometheus.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.22/samples/addons/grafana.yaml`
+- `kubectl get pods -n istio-system` -> wait until grafana and promotheus pods are runnning
+- `istioctl dashboard promotheus`
+- `istioctl dashboard grafana`
+- navigate to http://localhost:3000/ and explore the dashboards
+
+### Kiala
+- `helm repo add kiali https://kiali.org/helm-charts`
+- `helm repo update`
+- ```helm install kiali-server kiali/kiali-server \
+  --namespace istio-system \
+  --set auth.strategy="anonymous" \
+  --set deployment.accessible_namespaces="**"
+  ```
+- `istioctl dashboard kiali`
+- navigate to http://localhost:20001
+
+
+
+
+## 🔗 References
+- [Slides](https://docs.google.com/presentation/d/e/2PACX-1vQ99ZnVFukQydUL-TljE5CaTNXNvNYteIOnizMLa2KJywtUqNJ1ks0zHLiEMwOM8x6mmyv2qWW0AMMP/pub?start=true&loop=true&delayms=10000)
+- [Medium Article](https://medium.com/@stephaniehohenberg/a-guide-to-kubernetes-deployment-strategies-and-traffic-management-ee5f9c3a45aa)
 
 
 
