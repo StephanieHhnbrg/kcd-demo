@@ -38,13 +38,16 @@ In case a custom Docker Image is used in the `deployment.yaml`, create a K8 secr
 - `kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.22/samples/addons/grafana.yaml`
 - `kubectl get pods -n istio-system` -> wait until grafana and promotheus pods are runnning
 - `istioctl dashboard promotheus`
+    - navigate to http://localhost:9090/ and explore the logs
+  - execute PromQL queries `istio_requests_total{response_code="200"}`
 - `istioctl dashboard grafana`
-- navigate to http://localhost:3000/ and explore the dashboards
+  - navigate to http://localhost:3000/ and explore the dashboards
 
 ### Kiala
 - `helm repo add kiali https://kiali.org/helm-charts`
 - `helm repo update`
-- ```helm install kiali-server kiali/kiali-server \
+- ```
+  helm install kiali-server kiali/kiali-server \
   --namespace istio-system \
   --set auth.strategy="anonymous" \
   --set deployment.accessible_namespaces="**"

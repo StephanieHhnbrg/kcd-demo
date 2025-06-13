@@ -29,5 +29,5 @@ spec:
           startupProbe:
             tcpSocket:
               port: {{ .Values.service.port }}
-            initialDelaySeconds: 20
+            initialDelaySeconds: 30
             periodSeconds: 5

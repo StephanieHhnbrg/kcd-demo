@@ -31,23 +31,4 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
 - `curl -H "Cookie: ab_test_group=B" http://localhost:8080/` -> v2
 - `curl http://localhost:8080/` -> v1
 
-## Monitoring
-Grafana
-- `kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.22/samples/addons/prometheus.yaml`
-- `kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.22/samples/addons/grafana.yaml`
-- `kubectl get pods -n istio-system` -> wait until grafana and promotheus pods are runnning
-- `kubectl port-forward -n istio-system svc/prometheus 9090:9090`
-- `kubectl -n istio-system port-forward svc/grafana 3000:3000`
-- navigate to http://localhost:3000/ and explore the dashboards
-
-Kiala
-- `helm repo add kiali https://kiali.org/helm-charts`
-- `helm repo update`
-- ```helm install kiali-server kiali/kiali-server \
-  --namespace istio-system \
-  --set auth.strategy="anonymous" \
-  --set deployment.accessible_namespaces="**"
-  ```
-- `istioctl dashboard kiali`
-- navigate to http://localhost:20001
 
