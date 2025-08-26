@@ -1,9 +1,7 @@
-{{- if eq .Values.color "blue" }}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.app.name }}
-  release-name: {{ .Values.app.name }}-{{ .Values.color }}
 spec:
   selector:
     app: {{ .Values.app.name }}
@@ -12,5 +10,3 @@ spec:
     - protocol: TCP
       port: {{ .Values.service.port }}
       targetPort: http
-{{- end }}
-

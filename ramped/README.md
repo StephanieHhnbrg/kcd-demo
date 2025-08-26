@@ -27,3 +27,4 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
 
 ## Demo
 ![Demo](./../assets/ramped.gif)
+![Visualization](./../assets/visualizations/ramped.gif)

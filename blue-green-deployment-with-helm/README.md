@@ -16,10 +16,10 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
 
 
 ## Steps
-1. Install Blue version
-   - `helm install kcd-blue-demo ./`
-2. Install Green version
-   - `helm install kcd-green-demo ./ --set color=green`
+1. Install deployments and service
+   - `helm install kcd-bg-routing ./charts/routing`
+   - `helm install kcd-blue-demo ./charts/deployment`
+   - `helm install kcd-green-demo ./charts/deployment --set color=green`
 3. Redirect Traffic
    - updates service selector to send traffic to green pods only \
      `kubectl patch svc kcd-bg-demo -p '{"spec":{"selector":{"app":"kcd-bg-demo","color":"green"}}}'`
@@ -38,4 +38,5 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
    - `helm uninstall kcd-blue-demo`
 
 ## Demo
-![Demo](./../assets/blue-green-helm.gif)
+![Demo](./../assets/demo/blue-green-helm.gif)
+![Visualization](./../assets/visualizations/blue-green.gif)

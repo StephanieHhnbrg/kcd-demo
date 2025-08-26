@@ -31,4 +31,5 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
 - `curl -H "Cookie: ab_test_group=B" http://localhost:8080/` -> v2
 - `curl http://localhost:8080/` -> v1
 
-
+## Visualization
+![Visualization](./../assets/visualizations/ab-testing.png)

@@ -40,3 +40,4 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
 
 ## Demo
 ![Demo](./../assets/canary-helm.gif)
+![Visualization](./../assets/visualizations/canary.png)

@@ -59,8 +59,11 @@ In case a custom Docker Image is used in the `deployment.yaml`, create a K8 secr
 
 
 ## 🔗 References
-- [Slides](https://docs.google.com/presentation/d/e/2PACX-1vQ99ZnVFukQydUL-TljE5CaTNXNvNYteIOnizMLa2KJywtUqNJ1ks0zHLiEMwOM8x6mmyv2qWW0AMMP/pub?start=true&loop=true&delayms=10000)
+- Slides:
+  - 🇨🇴 [KCD Bogota](https://docs.google.com/presentation/d/e/2PACX-1vQg2_LFT5lo1qw6gc6yuWTWobUrVcXWCfIbYrT-cxSSwq92XxbW9uNaC22pR093H5uoONn1RpFdvoKD/pub?start=false&loop=false&delayms=10000)
+  - 🇬🇹 [KCD Antigua](https://docs.google.com/presentation/d/e/2PACX-1vQ99ZnVFukQydUL-TljE5CaTNXNvNYteIOnizMLa2KJywtUqNJ1ks0zHLiEMwOM8x6mmyv2qWW0AMMP/pub?start=true&loop=true&delayms=10000)
 - [Medium Article](https://medium.com/@stephaniehohenberg/a-guide-to-kubernetes-deployment-strategies-and-traffic-management-ee5f9c3a45aa)
+- [Visualization](https://github.com/StephanieHhnbrg/kcd-demo/tree/main/assets/visualizations)
 
 
 

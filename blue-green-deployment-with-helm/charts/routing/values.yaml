@@ -1,0 +1,5 @@
+app:
+  name: kcd-bg-demo
+service:
+  port: 8183
+color: blue

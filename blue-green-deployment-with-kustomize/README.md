@@ -40,4 +40,5 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
    - `kubectl delete deployment kcd-bg-demo-green`
 
 ## Demo
-![Demo](./../assets/blue-green-kustomize.gif)
+![Demo](./../assets/demo/blue-green-kustomize.gif)
+![Visualization](./../assets/visualizations/blue-green.gif)

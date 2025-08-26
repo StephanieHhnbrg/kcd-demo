@@ -21,3 +21,4 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
 
 ## Demo
 ![Demo](./../assets/recreate.gif)
+![Visualization](./../assets/visualizations/recreate.gif)

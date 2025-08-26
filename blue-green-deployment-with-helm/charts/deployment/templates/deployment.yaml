@@ -21,11 +21,11 @@ spec:
           image: "ghcr.io/stephaniehhnbrg/kcd-demo:{{ .Values.color }}"
           imagePullPolicy: Always
           env:
-          - name: PORT
-            value: "{{ .Values.service.port }}"
+            - name: PORT
+              value: "{{ .Values.service.port }}"
           ports:
-          - name: http
-            containerPort: {{ .Values.service.port }}
+            - name: http
+              containerPort: {{ .Values.service.port }}
           startupProbe:
             tcpSocket:
               port: {{ .Values.service.port }}

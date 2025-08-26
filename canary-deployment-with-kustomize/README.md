@@ -47,3 +47,4 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
 
 ## Demo
 ![Demo](./../assets/canary-kustomize.gif)
+![Visualization](./../assets/visualizations/canary.png)
