@@ -1,0 +1,65 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: canary-routing
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/StephanieHhnbrg/kcd-demo.git'
+    targetRevision: main
+    path: canary-deployment-with-helm/charts//routing
+    helm:
+      releaseName: routing
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: canary
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: canary-deployment-stable
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/StephanieHhnbrg/kcd-demo.git'
+    targetRevision: main
+    path: canary-deployment-with-helm/charts/deployment
+    helm:
+      releaseName: stable
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: canary
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: canary-deployment-canary
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/StephanieHhnbrg/kcd-demo.git'
+    targetRevision: main
+    path: canary-deployment-with-helm/charts/deployment
+    helm:
+      releaseName: canary
+      parameters:
+        - name: app.version
+          value: v2
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: canary
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

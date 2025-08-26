@@ -1,0 +1,65 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bg-routing
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/StephanieHhnbrg/kcd-demo.git'
+    targetRevision: main
+    path: blue-green-deployment-with-helm/charts/routing
+    helm:
+      releaseName: routing
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: blue-green
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bg-deployment-blue
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/StephanieHhnbrg/kcd-demo.git'
+    targetRevision: main
+    path: blue-green-deployment-with-helm/charts/deployment
+    helm:
+      releaseName: blue
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: blue-green
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bg-deployment-green
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/StephanieHhnbrg/kcd-demo.git'
+    targetRevision: main
+    path: blue-green-deployment-with-helm/charts/deployment
+    helm:
+      releaseName: green
+      parameters:
+        - name: color
+          value: green
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: blue-green
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

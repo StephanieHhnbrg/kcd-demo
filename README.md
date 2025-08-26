@@ -55,8 +55,8 @@ In case a custom Docker Image is used in the `deployment.yaml`, create a K8 secr
 - `istioctl dashboard kiali`
 - navigate to http://localhost:20001
 
-
-
+## CICD
+To learn how to integrate the deployment strategies into your CI/CD pipeline, see the detailed instructions in the [ArgoCD README](./argocd/README.md).
 
 ## 🔗 References
 - Slides:
