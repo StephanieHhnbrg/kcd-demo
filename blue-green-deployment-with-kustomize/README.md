@@ -29,7 +29,7 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
    - `kubectl get pods` -> 4 pods are running (2: blue, 2: green)
    - `kubectl get svc` -> kcd-bg-demo service is running
    - `kubectl run curl --image=alpine/curl:latest -n kube-system -i --tty --rm -- sh`
-     - `for i in `seq 1 100`; do curl kcd-bg-demo.default:8185/; echo ""; sleep 1; done`
+     - `for i in `seq 1 100`; do curl kcd-bg-demo.default:8186/; echo ""; sleep 1; done`
 5. Optional Rollback
    - `sed -i '' "s/green/blue/g" ./base/deployment.yaml`
    - `kubectl apply -k overlays/blue`

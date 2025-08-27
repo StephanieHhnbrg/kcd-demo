@@ -9,5 +9,5 @@ spec:
     app: kcd-canary-demo
   ports:
     - protocol: TCP
-      port: 8186
+      port: 8187
       targetPort: http

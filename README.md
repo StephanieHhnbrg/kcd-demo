@@ -10,6 +10,7 @@ This project showcases how to apply different Kubernetes deployment strategies u
 - [Canary](./canary-deployment-with-helm/README.md): releasing new version to a subset of users and then do a full rollout
 - [A / B Testing](./a-b-testing/README.md): releasing new version to a subset of users for testing purposes
 
+
 ## Prerequisites
 Ensure the following tools are installed:
 - [Docker](https://docs.docker.com/desktop/setup/install/mac-install/)
@@ -18,6 +19,7 @@ Ensure the following tools are installed:
 - [Helm](https://helm.sh/) -> `brew install helm`
 - [kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/) -> `brew install kustomize`
 
+
 ## Set Up
 - `open -a Docker`
 - `minikube start`
@@ -25,11 +27,39 @@ Ensure the following tools are installed:
 - `minikube status`
 - `kubectl get nodes`
 
+
+It is best to run each demo in its own namespace to keep resources isolated.: \
+`kubectl create namespace <namespace-name>` \
+Then, include the namespace flag `-n <namespace-name>` in all subsequent commands (see the README for each deployment strategy).
+
+
 In case a custom Docker Image is used in the `deployment.yaml`, create a K8 secret for the authentication to GitHub Container Registry. See step 4 in this [README](./docker/README.md)
+
+
+Next, follow the README of the deployment strategy you’d like to try out.
+
 
 ## Clean Up
 - `helm uninstall <release-name>`
 - `minikube delete`
+
+
+## Ports used
+| port  | application                           |
+|:------|:--------------------------------------|
+| 3000  | grafana                               |
+| 8080  | istio                                 |
+| 9090  | promotheus                            |
+| 9091  | argocd                                |
+| 20001 | kiali                                 |
+| ------| ------------------------------------- |
+| 8181  | ramped deployment                     |
+| 8182  | recreate deployment                   |
+| 8183  | blue green deployment with helm       |
+| 8184  | canary deployment with helm           |
+| 8185  | a b testing deployment                |
+| 8186  | blue green deployment with kustomize  |
+| 8187  | canary deployment with kustomize      |
 
 
 ## Monitoring
@@ -43,6 +73,7 @@ In case a custom Docker Image is used in the `deployment.yaml`, create a K8 secr
 - `istioctl dashboard grafana`
   - navigate to http://localhost:3000/ and explore the dashboards
 
+
 ### Kiala
 - `helm repo add kiali https://kiali.org/helm-charts`
 - `helm repo update`
@@ -54,6 +85,7 @@ In case a custom Docker Image is used in the `deployment.yaml`, create a K8 secr
   ```
 - `istioctl dashboard kiali`
 - navigate to http://localhost:20001
+
 
 ## CICD
 To learn how to integrate the deployment strategies into your CI/CD pipeline, see the detailed instructions in the [ArgoCD README](./argocd/README.md).

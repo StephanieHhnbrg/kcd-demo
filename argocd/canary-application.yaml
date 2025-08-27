@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/StephanieHhnbrg/kcd-demo.git'
     targetRevision: main
-    path: canary-deployment-with-helm/charts//routing
+    path: canary-deployment-with-helm/charts/routing
     helm:
       releaseName: routing
   destination:

@@ -22,12 +22,12 @@ spec:
           imagePullPolicy: Always
           env:
             - name: PORT
-              value: "8186"
+              value: "8187"
           ports:
             - name: http
-              containerPort: 8186
+              containerPort: 8187
           startupProbe:
             tcpSocket:
-              port: 8186
+              port: 8187
             initialDelaySeconds: 30
             periodSeconds: 5

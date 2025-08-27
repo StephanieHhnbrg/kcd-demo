@@ -8,5 +8,5 @@ spec:
     color: blue
   ports:
     - protocol: TCP
-      port: 8185
+      port: 8186
       targetPort: http

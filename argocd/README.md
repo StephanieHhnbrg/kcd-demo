@@ -13,10 +13,10 @@ This enables repeatable, auditable, version-controlled deployments and provides 
 minikube start
 kubectl create namespace argocd   
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-kubectl port-forward svc/argocd-server -n argocd 8080:443
+kubectl port-forward svc/argocd-server -n argocd 9091:443
 ```
 
-Checkout the dashboard at https://localhost:8080/applications \
+Checkout the dashboard at https://localhost:9091/applications \
 Retrieve the password for the admin user by the following command:
 ```
 kubectl get secret argocd-initial-admin-secret -n argocd \
