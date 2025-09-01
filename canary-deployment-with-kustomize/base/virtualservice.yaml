@@ -12,8 +12,8 @@ spec:
         - destination:
             host: kcd-canary-demo
             subset: v1
-          weight: 100
+          weight: 0
         - destination:
             host: kcd-canary-demo
             subset: v2
-          weight: 0
+          weight: 100

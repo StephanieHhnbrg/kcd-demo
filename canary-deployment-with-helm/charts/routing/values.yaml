@@ -3,5 +3,5 @@ app:
 service:
   port: 8184
 traffic:
-  v1: 100
-  v2: 0
+  v1: 0
+  v2: 100
