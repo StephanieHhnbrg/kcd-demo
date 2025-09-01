@@ -4,7 +4,7 @@ metadata:
   name: kcd-canary-demo
 spec:
   hosts:
-    - "*"
+    - "kustomize.example.com"
   gateways:
     - kcd-canary-demo-gateway
   http:

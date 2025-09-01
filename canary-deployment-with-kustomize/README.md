@@ -23,10 +23,8 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
    - `kubectl get namespace -L istio-injection`
    - `kubectl port-forward -n istio-system svc/istio-ingressgateway 8080:80`
 1. Apply v1
-   - Ensure the field `metadata.name` in [`deployment.yaml`](./base/deployment.yaml) is set to `kcd-canary-demo-v1`
    - `kubectl apply -k overlays/v1`
 2. Apply v2
-   - `sed -i '' "s/kcd-canary-demo-v1/kcd-canary-demo-v2/g" ./base/deployment.yaml`
    - `kubectl apply -k overlays/v2`
 3. Traffic shifting
    - `kubectl get virtualservice kcd-canary-demo -o jsonpath='{range .spec.http[0].route[*]}Subset: {.destination.subset}, Weight: {.weight}{"\n"}{end}'`
@@ -39,9 +37,8 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
    - `kubectl get deployments` -> v1 & v2 deployments are available
    - `kubectl get pods` -> 4 pods are running (2: v1, 2: v2)
    - `kubectl get svc` -> kcd-canary-demo service is running
-   - `for i in `seq 1 100`; do curl http://localhost:8080/; echo ""; sleep 0.2; done`
+   - `for i in `seq 1 100`; do curl -H "Host: kustomize.example.com" http://localhost:8080/; echo ""; sleep 0.2; done`
 6. Cleanup
-   - `sed -i '' "s/kcd-canary-demo-v2/kcd-canary-demo-v1/g" ./base/deployment.yaml`
    - `kubectl delete -k overlays/v1`
    - `kubectl delete deployment kcd-canary-demo-v2`
 

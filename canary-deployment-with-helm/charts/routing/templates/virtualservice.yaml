@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.app.name }}
 spec:
   hosts:
-    - "*"
+    - "helm.example.com"
   gateways:
     - "{{ .Values.app.name }}-gateway"
   http:

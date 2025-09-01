@@ -35,7 +35,7 @@ For installation prerequisites, setup instructions, and cleanup procedures, plea
 4. Verify deployment
 - `kubectl get virtualservice kcd-canary-demo -o jsonpath='{range .spec.http[0].route[*]}Subset: {.destination.subset}, Weight: {.weight}{"\n"}{end}'`
 - `watch -n 0.5 -t kubectl get pods -n default`
-- `for i in `seq 1 100`; do curl http://localhost:8080/; echo ""; sleep 0.2; done`
+- `for i in `seq 1 100`; do curl -H "Host: helm.example.com" http://localhost:8080/; echo ""; sleep 0.2; done`
 
 
 ## Demo
